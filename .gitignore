@@ -1,0 +1,19 @@
+# Maven
+target/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# IntelliJ
+.idea/
+
+# Logs
+*.log
+
+# Secrets
+.env
+
+# Temporary JMeter results
+*.jtl
