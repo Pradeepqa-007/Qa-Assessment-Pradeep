@@ -44,7 +44,35 @@ url=https://opensource-demo.orangehrmlive.com/
 username=Admin
 password=admin123
 browser=chrome
+## API Authentication
 
+The OrangeHRM API requires a valid Bearer Token.
+
+For security reasons, the API token is not committed to the repository.
+
+### Java API Tests
+
+Set the environment variable before running the API tests.
+
+Windows PowerShell:
+
+$env:ORANGEHRM_API_TOKEN="Bearer def502001f64fdfdc63165f8f62269dba1e133d0727e6ef8c84b9ce32ca18ee0a9f05f7f63f3704af82ed481dcf76956ea382fabf8b66a5668e94d190071d6d1d2e1eed28ac86645eb6d4b0900efcf6e5da9e9dfd87527a2b2da77019089b3be8a2cc8a8f9ff073f8a64933cc54967ce440462c01142766f071771d19fcd37015cb6de198df5be6ed000fd6ef1408f32641769d8746d3539cd52c8b53c3ea442fafafce0"
+
+Then run:
+
+mvn test
+
+### JMeter Performance Testing
+
+Pass the API token as a JMeter property at runtime:
+
+jmeter.bat -n -t "performance\orangehrm-performance.jmx" -JAPI_TOKEN=" Bearer def502001f64fdfdc63165f8f62269dba1e133d0727e6ef8c84b9ce32ca18ee0a9f05f7f63f3704af82ed481dcf76956ea382fabf8b66a5668e94d190071d6d1d2e1eed28ac86645eb6d4b0900efcf6e5da9e9dfd87527a2b2da77019089b3be8a2cc8a8f9ff073f8a64933cc54967ce440462c01142766f071771d19fcd37015cb6de198df5be6ed000fd6ef1408f32641769d8746d3539cd52c8b53c3ea442fafafce0" -l "results.jtl" -e -o "jmeter-report"
+
+The JMeter test plan reads the token dynamically using:
+
+${__P(API_TOKEN)}
+
+A valid OrangeHRM API token is required to execute the authenticated API and performance tests.
 Test data is maintained in:
 
 src/test/resources/testdata/employee.csv
